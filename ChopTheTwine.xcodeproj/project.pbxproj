@@ -55,13 +55,45 @@
 			isa = PBXGroup;
 			children = (
 				A21B74D425A3CFAE00B6FF3F /* AppDelegate.swift */,
-				A21B74DA25A3CFAE00B6FF3F /* GameScene.swift */,
-				A21B74DC25A3CFAE00B6FF3F /* GameViewController.swift */,
-				A21B74DE25A3CFAE00B6FF3F /* Main.storyboard */,
+				A21B750925A3E2A600B6FF3F /* Models */,
+				A21B750B25A3E2BC00B6FF3F /* Controllers */,
+				A21B750C25A3E2C800B6FF3F /* Scenes */,
+				A21B750425A3E22D00B6FF3F /* Supporting Files */,
 				A21B74E125A3CFAF00B6FF3F /* Assets.xcassets */,
-				A21B74E325A3CFAF00B6FF3F /* Info.plist */,
 			);
 			path = ChopTheTwine;
+			sourceTree = "<group>";
+		};
+		A21B750425A3E22D00B6FF3F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A21B74DE25A3CFAE00B6FF3F /* Main.storyboard */,
+				A21B74E325A3CFAF00B6FF3F /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A21B750925A3E2A600B6FF3F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A21B750B25A3E2BC00B6FF3F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A21B74DC25A3CFAE00B6FF3F /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A21B750C25A3E2C800B6FF3F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A21B74DA25A3CFAE00B6FF3F /* GameScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +308,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5737H7U64V;
-				INFOPLIST_FILE = ChopTheTwine/Info.plist;
+				INFOPLIST_FILE = "ChopTheTwine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,7 +327,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5737H7U64V;
-				INFOPLIST_FILE = ChopTheTwine/Info.plist;
+				INFOPLIST_FILE = "ChopTheTwine/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
