@@ -12,9 +12,16 @@ class GameScene: SKScene {
     private var prize: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        
+        setupPhysics()
         setupBackground()
         setupCrocodile()
+        setupPrize()
+    }
+    
+    private func setupPhysics() {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+        physicsWorld.speed = 1.0
     }
     
     private func setupBackground() {
@@ -46,4 +53,21 @@ class GameScene: SKScene {
             
         addChild(crocodile)
     }
+    
+    private func setupPrize() {
+        prize = SKSpriteNode(imageNamed: Images.prize)
+        prize.position = CGPoint(x: size.width * 0.5, y: size.height * 0.7)
+        prize.zPosition = Layers.prize
+        prize.physicsBody = SKPhysicsBody(circleOfRadius: prize.size.height / 2)
+        prize.physicsBody?.categoryBitMask = PhysicsCategory.prize
+        prize.physicsBody?.collisionBitMask = 0
+        prize.physicsBody?.density = 0.5
+
+        addChild(prize)
+    }
+}
+
+// MARK: - SKPhysicsContactDelegate
+extension GameScene: SKPhysicsContactDelegate {
+    
 }

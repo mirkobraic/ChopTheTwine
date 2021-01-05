@@ -13,4 +13,6 @@ enum Images {
     static let crocMouthClosed = "crocMouthClosed"
     static let crocMouthOpen = "crocMouthOpen"
     static let crocMask = "crocMask"
+    static let prize = "pineapple"
+    static let prizeMask = "pineappleMask"
 }
