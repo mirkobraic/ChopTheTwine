@@ -12,6 +12,9 @@
 		A21B74DD25A3CFAE00B6FF3F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B74DC25A3CFAE00B6FF3F /* GameViewController.swift */; };
 		A21B74E025A3CFAE00B6FF3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21B74DE25A3CFAE00B6FF3F /* Main.storyboard */; };
 		A21B74E225A3CFAF00B6FF3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21B74E125A3CFAF00B6FF3F /* Assets.xcassets */; };
+		A21B750F25A3E46100B6FF3F /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B750E25A3E46100B6FF3F /* Images.swift */; };
+		A21B751325A3E56800B6FF3F /* Layers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B751225A3E56800B6FF3F /* Layers.swift */; };
+		A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		A21B74DF25A3CFAE00B6FF3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A21B74E125A3CFAF00B6FF3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21B74E325A3CFAF00B6FF3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A21B750E25A3E46100B6FF3F /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		A21B751225A3E56800B6FF3F /* Layers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layers.swift; sourceTree = "<group>"; };
+		A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +61,13 @@
 			isa = PBXGroup;
 			children = (
 				A21B74D425A3CFAE00B6FF3F /* AppDelegate.swift */,
+				A21B751125A3E55200B6FF3F /* Constants */,
 				A21B750925A3E2A600B6FF3F /* Models */,
 				A21B750B25A3E2BC00B6FF3F /* Controllers */,
 				A21B750C25A3E2C800B6FF3F /* Scenes */,
 				A21B750425A3E22D00B6FF3F /* Supporting Files */,
 				A21B74E125A3CFAF00B6FF3F /* Assets.xcassets */,
+				A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */,
 			);
 			path = ChopTheTwine;
 			sourceTree = "<group>";
@@ -94,6 +102,15 @@
 				A21B74DA25A3CFAE00B6FF3F /* GameScene.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A21B751125A3E55200B6FF3F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A21B750E25A3E46100B6FF3F /* Images.swift */,
+				A21B751225A3E56800B6FF3F /* Layers.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */,
 				A21B74E025A3CFAE00B6FF3F /* Main.storyboard in Resources */,
 				A21B74E225A3CFAF00B6FF3F /* Assets.xcassets in Resources */,
 			);
@@ -166,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A21B74DB25A3CFAE00B6FF3F /* GameScene.swift in Sources */,
+				A21B750F25A3E46100B6FF3F /* Images.swift in Sources */,
+				A21B751325A3E56800B6FF3F /* Layers.swift in Sources */,
 				A21B74DD25A3CFAE00B6FF3F /* GameViewController.swift in Sources */,
 				A21B74D525A3CFAE00B6FF3F /* AppDelegate.swift in Sources */,
 			);
@@ -309,6 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5737H7U64V;
 				INFOPLIST_FILE = "ChopTheTwine/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,7 +337,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mirkobraic.ChopTheTwine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -328,6 +349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5737H7U64V;
 				INFOPLIST_FILE = "ChopTheTwine/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,7 +357,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mirkobraic.ChopTheTwine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
