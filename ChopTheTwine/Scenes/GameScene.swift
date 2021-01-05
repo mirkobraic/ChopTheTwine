@@ -85,6 +85,39 @@ class GameScene: SKScene {
             vine.attachToPrize(prize)
         }
     }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let startPoint = touch.location(in: self)
+            let endPoint = touch.previousLocation(in: self)
+            
+            // check if vine is cut
+            scene?.physicsWorld.enumerateBodies(
+                alongRayStart: startPoint,
+                end: endPoint,
+                using: { body, _, _, _ in
+                    self.checkIfVineIsCut(withBody: body)
+                })
+            
+            // TODO: add effect
+        }
+    }
+    
+    private func checkIfVineIsCut(withBody body: SKPhysicsBody) {
+        let node = body.node!
+        
+        // if it has a name it must be a vine node
+        guard let name = node.name else { return }
+        
+        node.removeFromParent()
+        // fade out all nodes matching name
+        enumerateChildNodes(withName: name, using: { node, _ in
+            let fadeAway = SKAction.fadeOut(withDuration: 0.25)
+            let removeNode = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([fadeAway, removeNode])
+            node.run(sequence)
+        })
+    }
 }
 
 // MARK: - SKPhysicsContactDelegate
