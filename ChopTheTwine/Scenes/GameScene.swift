@@ -16,6 +16,7 @@ class GameScene: SKScene {
         setupBackground()
         setupCrocodile()
         setupPrize()
+        setupVines()
     }
     
     private func setupPhysics() {
@@ -64,6 +65,25 @@ class GameScene: SKScene {
         prize.physicsBody?.density = 0.5
 
         addChild(prize)
+    }
+    
+    private func setupVines() {
+        let decoder = PropertyListDecoder()
+        
+        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.vineDataFile, withExtension: nil) else { return }
+        guard let data = try? Data(contentsOf: dataFile) else { return }
+        guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
+        
+        for (i, vineData) in vines.enumerated() {
+            let anchorX = vineData.relAnchorPoint.x * size.width
+            let anchorY = vineData.relAnchorPoint.y * size.height
+            let anchorPoint = CGPoint(x: anchorX, y: anchorY)
+            
+            let vine = VineNode(length: vineData.length, anchorPoint: anchorPoint, name: "\(i)")
+            
+            vine.addToScene(self)
+            vine.attachToPrize(prize)
+        }
     }
 }
 
