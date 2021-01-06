@@ -11,6 +11,11 @@ class GameScene: SKScene {
     private var crocodile: SKSpriteNode!
     private var prize: SKSpriteNode!
     
+    private let openMouthTresh: CGFloat = 170
+    private var areCrocMouthOpen = false
+    
+    private var isLevelOver = false
+    
     override func didMove(to view: SKView) {
         setupPhysics()
         setupBackground()
@@ -59,7 +64,8 @@ class GameScene: SKScene {
         prize = SKSpriteNode(imageNamed: Images.prize)
         prize.position = CGPoint(x: size.width * 0.5, y: size.height * 0.7)
         prize.zPosition = Layers.prize
-        prize.physicsBody = SKPhysicsBody(circleOfRadius: prize.size.height / 2)
+        let prizeTexture = SKTexture(imageNamed: Images.prizeMask)
+        prize.physicsBody = SKPhysicsBody(texture: prizeTexture, size: prize.size)
         prize.physicsBody?.categoryBitMask = PhysicsCategory.prize
         prize.physicsBody?.collisionBitMask = 0
         prize.physicsBody?.density = 0.5
@@ -118,9 +124,48 @@ class GameScene: SKScene {
             node.run(sequence)
         })
     }
+    
+    private func setCrocMouth(open: Bool) {
+        // don't set texture if not needed
+        guard areCrocMouthOpen != open else { return }
+        
+        areCrocMouthOpen = open
+        if open {
+            crocodile.texture = SKTexture(imageNamed: Images.crocMouthOpen)
+        } else {
+            crocodile.texture = SKTexture(imageNamed: Images.crocMouthClosed)
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        guard isLevelOver == false else { return }
+        
+        let distance = prize.position.distance(toPoint: crocodile.position)
+        if distance < openMouthTresh {
+            setCrocMouth(open: true)
+        } else {
+            setCrocMouth(open: false)
+        }
+        print(distance)
+    }
 }
 
 // MARK: - SKPhysicsContactDelegate
 extension GameScene: SKPhysicsContactDelegate {
-    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if (contact.bodyA.node == crocodile && contact.bodyB.node == prize)
+            || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
+            
+            // shrink the pineapple away
+            let shrink = SKAction.scale(to: 0, duration: 0.08)
+            let removeNode = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([shrink, removeNode])
+            prize.run(sequence)
+            
+            isLevelOver = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
+                self.setCrocMouth(open: false)
+            }
+        }
+    }
 }
