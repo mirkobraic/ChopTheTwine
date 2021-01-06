@@ -8,5 +8,6 @@
 import Foundation
 
 enum GameConfiguration {
-  static let vineDataFile = "VineData.plist"
+    static let level1 = "Level1.plist"
+    
 }

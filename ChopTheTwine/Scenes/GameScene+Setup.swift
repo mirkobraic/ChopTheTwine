@@ -61,7 +61,7 @@ extension GameScene {
     func setupVines() {
         let decoder = PropertyListDecoder()
         
-        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.vineDataFile, withExtension: nil) else { return }
+        guard let dataFile = Bundle.main.url(forResource: GameScene.currentLevel, withExtension: nil) else { return }
         guard let data = try? Data(contentsOf: dataFile) else { return }
         guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
         
