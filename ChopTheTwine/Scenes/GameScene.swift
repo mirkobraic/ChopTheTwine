@@ -14,7 +14,7 @@ class GameScene: SKScene {
     var activeSliceBG: SKShapeNode!
     var activeSliceFG: SKShapeNode!
     var activeSlicePoints = [CGPoint]()
-    let activeSliceTresh = 8
+    let activeSliceTresh = 10
     
     private let openMouthTresh: CGFloat = 170
     private var areCrocMouthOpen = false
@@ -85,6 +85,16 @@ class GameScene: SKScene {
         activeSliceFG.run(SKAction.fadeOut(withDuration: 0.22))
     }
     
+    private func switchToNewGame(withTransition transition: SKTransition) {
+        let delay = SKAction.wait(forDuration: 1)
+        let sceneChange = SKAction.run {
+            let scene = GameScene(size: self.size)
+            self.view?.presentScene(scene, transition: transition)
+        }
+        
+        run(.sequence([delay, sceneChange]))
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         activeSlicePoints.removeAll(keepingCapacity: true)
@@ -129,6 +139,10 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         guard isLevelOver == false else { return }
         
+        if prize.position.y <= 0 {
+            switchToNewGame(withTransition: .fade(withDuration: 0.8))
+        }
+
         let distance = prize.position.distance(toPoint: crocodile.position)
         if distance < openMouthTresh {
             setCrocMouth(open: true)
@@ -153,6 +167,7 @@ extension GameScene: SKPhysicsContactDelegate {
             prize.run(sequence)
             
             isLevelOver = true
+            switchToNewGame(withTransition: .doorway(withDuration: 0.8))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)
             }

@@ -9,5 +9,4 @@ import Foundation
 
 enum GameConfiguration {
   static let vineDataFile = "VineData.plist"
-  static let canCutMultipleVinesAtOnce = true
 }
