@@ -157,13 +157,15 @@ extension GameScene: SKPhysicsContactDelegate {
             || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
             
             // shrink the pineapple away
+            let move = SKAction.move(to: crocodile.position, duration: 0.10)
             let shrink = SKAction.scale(to: 0, duration: 0.08)
+            let dissapearGroup = SKAction.group([move, shrink])
             let removeNode = SKAction.removeFromParent()
-            let sequence = SKAction.sequence([shrink, removeNode])
+            let sequence = SKAction.sequence([dissapearGroup, removeNode])
             prize.run(sequence)
             
             isLevelOver = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)
             }
         }
