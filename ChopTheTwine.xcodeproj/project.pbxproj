@@ -21,6 +21,7 @@
 		A2797B5025A5257100FE96A3 /* VineData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2797B4F25A5257100FE96A3 /* VineData.plist */; };
 		A2797B5325A5264D00FE96A3 /* VineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5225A5264D00FE96A3 /* VineNode.swift */; };
 		A2797B5A25A5342800FE96A3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5925A5342800FE96A3 /* CGPoint.swift */; };
+		A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		A2797B4F25A5257100FE96A3 /* VineData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VineData.plist; sourceTree = "<group>"; };
 		A2797B5225A5264D00FE96A3 /* VineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineNode.swift; sourceTree = "<group>"; };
 		A2797B5925A5342800FE96A3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Setup.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				A21B74DA25A3CFAE00B6FF3F /* GameScene.swift */,
+				A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				A21B750F25A3E46100B6FF3F /* Images.swift in Sources */,
 				A2797B4825A5247800FE96A3 /* VineData.swift in Sources */,
 				A21B751325A3E56800B6FF3F /* Layers.swift in Sources */,
+				A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */,
 				A2797B4B25A524A500FE96A3 /* GameConfiguration.swift in Sources */,
 				A21B753D25A3EE9A00B6FF3F /* PhysicsCategory.swift in Sources */,
 				A21B74DD25A3CFAE00B6FF3F /* GameViewController.swift in Sources */,

@@ -8,8 +8,13 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    private var crocodile: SKSpriteNode!
-    private var prize: SKSpriteNode!
+    var crocodile: SKSpriteNode!
+    var prize: SKSpriteNode!
+    
+    var activeSliceBG: SKShapeNode!
+    var activeSliceFG: SKShapeNode!
+    var activeSlicePoints = [CGPoint]()
+    let activeSliceTresh = 8
     
     private let openMouthTresh: CGFloat = 170
     private var areCrocMouthOpen = false
@@ -22,90 +27,40 @@ class GameScene: SKScene {
         setupCrocodile()
         setupPrize()
         setupVines()
+        setupSlices()
     }
     
-    private func setupPhysics() {
-        physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
-        physicsWorld.speed = 1.0
-    }
-    
-    private func setupBackground() {
-        let background = SKSpriteNode(imageNamed: Images.background)
-        background.anchorPoint = CGPoint(x: 0, y: 0)
-        background.position = CGPoint(x: 0, y: 0)
-        background.zPosition = Layers.background
-        background.size = CGSize(width: size.width, height: size.height)
-        addChild(background)
-        
-        let water = SKSpriteNode(imageNamed: Images.water)
-        water.anchorPoint = CGPoint(x: 0, y: 0)
-        water.position = CGPoint(x: 0, y: 0)
-        water.zPosition = Layers.foreground
-        water.size = CGSize(width: size.width, height: size.height * 0.2139)
-        addChild(water)
-    }
-    
-    private func setupCrocodile() {
-        crocodile = SKSpriteNode(imageNamed: Images.crocMouthClosed)
-        crocodile.position = CGPoint(x: size.width * 0.75, y: size.height * 0.312)
-        crocodile.zPosition = Layers.crocodile
-        let crocodileTexture = SKTexture(imageNamed: Images.crocMask)
-        crocodile.physicsBody = SKPhysicsBody(texture: crocodileTexture, size: crocodile.size)
-        crocodile.physicsBody?.categoryBitMask = PhysicsCategory.crocodile
-        crocodile.physicsBody?.collisionBitMask = 0
-        crocodile.physicsBody?.contactTestBitMask = PhysicsCategory.prize
-        crocodile.physicsBody?.isDynamic = false
-            
-        addChild(crocodile)
-    }
-    
-    private func setupPrize() {
-        prize = SKSpriteNode(imageNamed: Images.prize)
-        prize.position = CGPoint(x: size.width * 0.5, y: size.height * 0.7)
-        prize.zPosition = Layers.prize
-        let prizeTexture = SKTexture(imageNamed: Images.prizeMask)
-        prize.physicsBody = SKPhysicsBody(texture: prizeTexture, size: prize.size)
-        prize.physicsBody?.categoryBitMask = PhysicsCategory.prize
-        prize.physicsBody?.collisionBitMask = 0
-        prize.physicsBody?.density = 0.5
-
-        addChild(prize)
-    }
-    
-    private func setupVines() {
-        let decoder = PropertyListDecoder()
-        
-        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.vineDataFile, withExtension: nil) else { return }
-        guard let data = try? Data(contentsOf: dataFile) else { return }
-        guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
-        
-        for (i, vineData) in vines.enumerated() {
-            let anchorX = vineData.relAnchorPoint.x * size.width
-            let anchorY = vineData.relAnchorPoint.y * size.height
-            let anchorPoint = CGPoint(x: anchorX, y: anchorY)
-            
-            let vine = VineNode(length: vineData.length, anchorPoint: anchorPoint, name: "\(i)")
-            
-            vine.addToScene(self)
-            vine.attachToPrize(prize)
+    private func redrawActiveSlice() {
+        if activeSlicePoints.count < 2 {
+            activeSliceBG.path = nil
+            activeSliceFG.path = nil
+            return
         }
+        
+        if activeSlicePoints.count > activeSliceTresh {
+            activeSlicePoints.removeFirst(activeSlicePoints.count - activeSliceTresh)
+        }
+        
+        let path = UIBezierPath()
+        path.move(to: activeSlicePoints[0])
+        
+        for i in 1 ..< activeSlicePoints.count {
+            path.addLine(to: activeSlicePoints[i])
+        }
+        
+        activeSliceBG.path = path.cgPath
+        activeSliceFG.path = path.cgPath
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let startPoint = touch.location(in: self)
-            let endPoint = touch.previousLocation(in: self)
-            
-            // check if vine is cut
-            scene?.physicsWorld.enumerateBodies(
-                alongRayStart: startPoint,
-                end: endPoint,
-                using: { body, _, _, _ in
-                    self.checkIfVineIsCut(withBody: body)
-                })
-            
-            // TODO: add effect
+    private func setCrocMouth(open: Bool) {
+        // don't set texture if not needed
+        guard areCrocMouthOpen != open else { return }
+        
+        areCrocMouthOpen = open
+        if open {
+            crocodile.texture = SKTexture(imageNamed: Images.crocMouthOpen)
+        } else {
+            crocodile.texture = SKTexture(imageNamed: Images.crocMouthClosed)
         }
     }
     
@@ -125,16 +80,50 @@ class GameScene: SKScene {
         })
     }
     
-    private func setCrocMouth(open: Bool) {
-        // don't set texture if not needed
-        guard areCrocMouthOpen != open else { return }
+    private func fadeOutSlice() {
+        activeSliceBG.run(SKAction.fadeOut(withDuration: 0.22))
+        activeSliceFG.run(SKAction.fadeOut(withDuration: 0.22))
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        activeSlicePoints.removeAll(keepingCapacity: true)
         
-        areCrocMouthOpen = open
-        if open {
-            crocodile.texture = SKTexture(imageNamed: Images.crocMouthOpen)
-        } else {
-            crocodile.texture = SKTexture(imageNamed: Images.crocMouthClosed)
-        }
+        activeSlicePoints.append(touch.location(in: self))
+        
+        redrawActiveSlice()
+        
+        // important so we don't fight fadeOutSlice
+        activeSliceBG.removeAllActions()
+        activeSliceFG.removeAllActions()
+        
+        activeSliceBG.alpha = 1
+        activeSliceFG.alpha = 1
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let startPoint = touch.location(in: self)
+        let endPoint = touch.previousLocation(in: self)
+        
+        activeSlicePoints.append(startPoint)
+        redrawActiveSlice()
+        
+        // check if vine is cut
+        scene?.physicsWorld.enumerateBodies(
+            alongRayStart: startPoint,
+            end: endPoint,
+            using: { body, _, _, _ in
+                self.checkIfVineIsCut(withBody: body)
+            })
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        fadeOutSlice()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        fadeOutSlice()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -146,7 +135,6 @@ class GameScene: SKScene {
         } else {
             setCrocMouth(open: false)
         }
-        print(distance)
     }
 }
 

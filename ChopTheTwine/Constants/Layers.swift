@@ -13,4 +13,6 @@ enum Layers {
     static let vine: CGFloat = 1
     static let prize: CGFloat = 2
     static let foreground: CGFloat = 3
+    static let sliceBG: CGFloat = 4
+    static let sliceFG: CGFloat = 5
 }
