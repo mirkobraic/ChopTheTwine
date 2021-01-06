@@ -19,19 +19,21 @@ class GameScene: SKScene {
     var nomNomSoundAction: SKAction!
     
     var waterHeight: CGFloat = 0
+    var groundHeight: CGFloat = 0
     
     var activeSliceBG: SKShapeNode!
     var activeSliceFG: SKShapeNode!
     var activeSlicePoints = [CGPoint]()
     let activeSliceTresh = 10
     
-    private let openMouthTresh: CGFloat = 170
+    private let openMouthTresh: CGFloat = 150
     private var areCrocMouthOpen = false
     
     private var isLevelOver = false
     
     override func didMove(to view: SKView) {
         waterHeight = size.height * 0.2139
+        groundHeight = size.height * 0.312
         
         setupPhysics()
         setupBackground()
@@ -166,9 +168,11 @@ class GameScene: SKScene {
         
         if prize.position.y <= waterHeight {
             run(splashSoundAction)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
+                self.setCrocMouth(open: false)
+            }
             runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
-            setCrocMouth(open: false)
             isLevelOver = true
         }
 

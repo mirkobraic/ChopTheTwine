@@ -33,7 +33,7 @@ extension GameScene {
     
     func setupCrocodile() {
         crocodile = SKSpriteNode(imageNamed: Images.crocMouthClosed)
-        crocodile.position = CGPoint(x: size.width * 0.75, y: size.height * 0.312)
+        crocodile.position = CGPoint(x: size.width * CGFloat.random(in: 0.15...0.85), y: groundHeight)
         crocodile.zPosition = Layers.crocodile
         let crocodileTexture = SKTexture(imageNamed: Images.crocMask)
         crocodile.physicsBody = SKPhysicsBody(texture: crocodileTexture, size: crocodile.size)
