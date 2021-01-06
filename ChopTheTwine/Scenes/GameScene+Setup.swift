@@ -27,7 +27,7 @@ extension GameScene {
         water.anchorPoint = CGPoint(x: 0, y: 0)
         water.position = CGPoint(x: 0, y: 0)
         water.zPosition = Layers.foreground
-        water.size = CGSize(width: size.width, height: size.height * 0.2139)
+        water.size = CGSize(width: size.width, height: waterHeight)
         addChild(water)
     }
     

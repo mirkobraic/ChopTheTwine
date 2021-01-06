@@ -18,6 +18,8 @@ class GameScene: SKScene {
     var splashSoundAction: SKAction!
     var nomNomSoundAction: SKAction!
     
+    var waterHeight: CGFloat = 0
+    
     var activeSliceBG: SKShapeNode!
     var activeSliceFG: SKShapeNode!
     var activeSlicePoints = [CGPoint]()
@@ -29,6 +31,8 @@ class GameScene: SKScene {
     private var isLevelOver = false
     
     override func didMove(to view: SKView) {
+        waterHeight = size.height * 0.2139
+        
         setupPhysics()
         setupBackground()
         setupCrocodile()
@@ -105,6 +109,12 @@ class GameScene: SKScene {
         run(.sequence([delay, sceneChange]))
     }
     
+    private func runWaterAnimation(at point: CGPoint) {
+        let waterParticles = SKEmitterNode(fileNamed: Particles.waterSplash)
+        waterParticles?.position = point
+        addChild(waterParticles!)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         activeSlicePoints.removeAll(keepingCapacity: true)
@@ -149,8 +159,9 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         guard isLevelOver == false else { return }
         
-        if prize.position.y <= 0 {
+        if prize.position.y <= waterHeight {
             run(splashSoundAction)
+            runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
             isLevelOver = true
         }

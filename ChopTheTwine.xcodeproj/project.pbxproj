@@ -27,6 +27,9 @@
 		A2956C1D25A62EDB00825E73 /* CheeZeeJungle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1925A62EDB00825E73 /* CheeZeeJungle.caf */; };
 		A2956C1E25A62EDB00825E73 /* NomNom.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1A25A62EDB00825E73 /* NomNom.caf */; };
 		A2956C1F25A62EDB00825E73 /* Splash.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1B25A62EDB00825E73 /* Splash.caf */; };
+		A2956C3125A6332F00825E73 /* WaterSplash.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2956C2F25A6332F00825E73 /* WaterSplash.sks */; };
+		A2956C3225A6332F00825E73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2956C3025A6332F00825E73 /* Assets.xcassets */; };
+		A2956C3625A6342100825E73 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2956C3525A6342100825E73 /* Particles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		A2956C1925A62EDB00825E73 /* CheeZeeJungle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CheeZeeJungle.caf; sourceTree = "<group>"; };
 		A2956C1A25A62EDB00825E73 /* NomNom.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NomNom.caf; sourceTree = "<group>"; };
 		A2956C1B25A62EDB00825E73 /* Splash.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splash.caf; sourceTree = "<group>"; };
+		A2956C2F25A6332F00825E73 /* WaterSplash.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WaterSplash.sks; sourceTree = "<group>"; };
+		A2956C3025A6332F00825E73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2956C3525A6342100825E73 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +144,10 @@
 			children = (
 				A21B750E25A3E46100B6FF3F /* Images.swift */,
 				A21B751225A3E56800B6FF3F /* Layers.swift */,
+				A2956C3525A6342100825E73 /* Particles.swift */,
+				A2956C1425A62EB400825E73 /* Sound.swift */,
 				A21B753C25A3EE9A00B6FF3F /* PhysicsCategory.swift */,
 				A2797B4A25A524A500FE96A3 /* GameConfiguration.swift */,
-				A2956C1425A62EB400825E73 /* Sound.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -148,6 +155,7 @@
 		A2797B4D25A5255500FE96A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A2956C2125A632C700825E73 /* Particles */,
 				A2956C1725A62ECE00825E73 /* Sound */,
 				A2797B4E25A5256500FE96A3 /* Data */,
 			);
@@ -179,6 +187,15 @@
 				A2956C1B25A62EDB00825E73 /* Splash.caf */,
 			);
 			path = Sound;
+			sourceTree = "<group>";
+		};
+		A2956C2125A632C700825E73 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				A2956C2F25A6332F00825E73 /* WaterSplash.sks */,
+				A2956C3025A6332F00825E73 /* Assets.xcassets */,
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +258,8 @@
 				A2797B5025A5257100FE96A3 /* VineData.plist in Resources */,
 				A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */,
 				A2956C1C25A62EDB00825E73 /* Slice.caf in Resources */,
+				A2956C3125A6332F00825E73 /* WaterSplash.sks in Resources */,
+				A2956C3225A6332F00825E73 /* Assets.xcassets in Resources */,
 				A21B74E025A3CFAE00B6FF3F /* Main.storyboard in Resources */,
 				A21B74E225A3CFAF00B6FF3F /* Assets.xcassets in Resources */,
 				A2956C1F25A62EDB00825E73 /* Splash.caf in Resources */,
@@ -261,6 +280,7 @@
 				A21B750F25A3E46100B6FF3F /* Images.swift in Sources */,
 				A2797B4825A5247800FE96A3 /* VineData.swift in Sources */,
 				A21B751325A3E56800B6FF3F /* Layers.swift in Sources */,
+				A2956C3625A6342100825E73 /* Particles.swift in Sources */,
 				A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */,
 				A2797B4B25A524A500FE96A3 /* GameConfiguration.swift in Sources */,
 				A2956C1525A62EB400825E73 /* Sound.swift in Sources */,
