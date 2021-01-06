@@ -5,8 +5,8 @@
 //  Created by Mirko Braic on 06/01/2021.
 //
 
-import UIKit
 import SpriteKit
+import AVFoundation
 
 extension GameScene {
     func setupPhysics() {
@@ -90,5 +90,30 @@ extension GameScene {
         
         addChild(activeSliceBG)
         addChild(activeSliceFG)
+    }
+    
+    func setupAudio() {
+        if GameScene.backgroundMusicPlayer == nil {
+            let backgroundMusicURL = Bundle.main.url(
+                forResource: SoundFile.backgroundMusic,
+                withExtension: nil)
+            
+            do {
+                let theme = try AVAudioPlayer(contentsOf: backgroundMusicURL!)
+                GameScene.backgroundMusicPlayer = theme
+            } catch {
+                print("Audio error: could not load a file!")
+            }
+            
+            GameScene.backgroundMusicPlayer.numberOfLoops = -1
+        }
+        
+        if !GameScene.backgroundMusicPlayer.isPlaying {
+            GameScene.backgroundMusicPlayer.play()
+        }
+        
+        sliceSoundAction = .playSoundFileNamed(SoundFile.slice, waitForCompletion: false)
+        splashSoundAction = .playSoundFileNamed(SoundFile.splash, waitForCompletion: false)
+        nomNomSoundAction = .playSoundFileNamed(SoundFile.nomNom, waitForCompletion: false)
     }
 }

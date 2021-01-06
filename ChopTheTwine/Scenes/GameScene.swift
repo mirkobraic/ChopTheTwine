@@ -6,10 +6,17 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
+    static var backgroundMusicPlayer: AVAudioPlayer!
+    
     var crocodile: SKSpriteNode!
     var prize: SKSpriteNode!
+    
+    var sliceSoundAction: SKAction!
+    var splashSoundAction: SKAction!
+    var nomNomSoundAction: SKAction!
     
     var activeSliceBG: SKShapeNode!
     var activeSliceFG: SKShapeNode!
@@ -28,6 +35,7 @@ class GameScene: SKScene {
         setupPrize()
         setupVines()
         setupSlices()
+        setupAudio()
     }
     
     private func redrawActiveSlice() {
@@ -78,6 +86,8 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([fadeAway, removeNode])
             node.run(sequence)
         })
+        
+        run(sliceSoundAction)
     }
     
     private func fadeOutSlice() {
@@ -140,7 +150,9 @@ class GameScene: SKScene {
         guard isLevelOver == false else { return }
         
         if prize.position.y <= 0 {
+            run(splashSoundAction)
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
+            isLevelOver = true
         }
 
         let distance = prize.position.distance(toPoint: crocodile.position)
@@ -155,6 +167,8 @@ class GameScene: SKScene {
 // MARK: - SKPhysicsContactDelegate
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
+        guard isLevelOver == false else { return }
+        
         if (contact.bodyA.node == crocodile && contact.bodyB.node == prize)
             || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
             
@@ -165,6 +179,7 @@ extension GameScene: SKPhysicsContactDelegate {
             let removeNode = SKAction.removeFromParent()
             let sequence = SKAction.sequence([dissapearGroup, removeNode])
             prize.run(sequence)
+            run(nomNomSoundAction)
             
             isLevelOver = true
             switchToNewGame(withTransition: .doorway(withDuration: 0.8))

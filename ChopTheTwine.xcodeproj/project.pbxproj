@@ -22,6 +22,11 @@
 		A2797B5325A5264D00FE96A3 /* VineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5225A5264D00FE96A3 /* VineNode.swift */; };
 		A2797B5A25A5342800FE96A3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5925A5342800FE96A3 /* CGPoint.swift */; };
 		A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */; };
+		A2956C1525A62EB400825E73 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2956C1425A62EB400825E73 /* Sound.swift */; };
+		A2956C1C25A62EDB00825E73 /* Slice.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1825A62EDA00825E73 /* Slice.caf */; };
+		A2956C1D25A62EDB00825E73 /* CheeZeeJungle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1925A62EDB00825E73 /* CheeZeeJungle.caf */; };
+		A2956C1E25A62EDB00825E73 /* NomNom.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1A25A62EDB00825E73 /* NomNom.caf */; };
+		A2956C1F25A62EDB00825E73 /* Splash.caf in Resources */ = {isa = PBXBuildFile; fileRef = A2956C1B25A62EDB00825E73 /* Splash.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		A2797B5225A5264D00FE96A3 /* VineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineNode.swift; sourceTree = "<group>"; };
 		A2797B5925A5342800FE96A3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Setup.swift"; sourceTree = "<group>"; };
+		A2956C1425A62EB400825E73 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		A2956C1825A62EDA00825E73 /* Slice.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Slice.caf; sourceTree = "<group>"; };
+		A2956C1925A62EDB00825E73 /* CheeZeeJungle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CheeZeeJungle.caf; sourceTree = "<group>"; };
+		A2956C1A25A62EDB00825E73 /* NomNom.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NomNom.caf; sourceTree = "<group>"; };
+		A2956C1B25A62EDB00825E73 /* Splash.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splash.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +140,7 @@
 				A21B751225A3E56800B6FF3F /* Layers.swift */,
 				A21B753C25A3EE9A00B6FF3F /* PhysicsCategory.swift */,
 				A2797B4A25A524A500FE96A3 /* GameConfiguration.swift */,
+				A2956C1425A62EB400825E73 /* Sound.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 		A2797B4D25A5255500FE96A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A2956C1725A62ECE00825E73 /* Sound */,
 				A2797B4E25A5256500FE96A3 /* Data */,
 			);
 			path = Resources;
@@ -156,6 +168,17 @@
 				A2797B5925A5342800FE96A3 /* CGPoint.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2956C1725A62ECE00825E73 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				A2956C1925A62EDB00825E73 /* CheeZeeJungle.caf */,
+				A2956C1A25A62EDB00825E73 /* NomNom.caf */,
+				A2956C1825A62EDA00825E73 /* Slice.caf */,
+				A2956C1B25A62EDB00825E73 /* Splash.caf */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,8 +240,12 @@
 			files = (
 				A2797B5025A5257100FE96A3 /* VineData.plist in Resources */,
 				A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */,
+				A2956C1C25A62EDB00825E73 /* Slice.caf in Resources */,
 				A21B74E025A3CFAE00B6FF3F /* Main.storyboard in Resources */,
 				A21B74E225A3CFAF00B6FF3F /* Assets.xcassets in Resources */,
+				A2956C1F25A62EDB00825E73 /* Splash.caf in Resources */,
+				A2956C1D25A62EDB00825E73 /* CheeZeeJungle.caf in Resources */,
+				A2956C1E25A62EDB00825E73 /* NomNom.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +263,7 @@
 				A21B751325A3E56800B6FF3F /* Layers.swift in Sources */,
 				A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */,
 				A2797B4B25A524A500FE96A3 /* GameConfiguration.swift in Sources */,
+				A2956C1525A62EB400825E73 /* Sound.swift in Sources */,
 				A21B753D25A3EE9A00B6FF3F /* PhysicsCategory.swift in Sources */,
 				A21B74DD25A3CFAE00B6FF3F /* GameViewController.swift in Sources */,
 				A2797B5A25A5342800FE96A3 /* CGPoint.swift in Sources */,
