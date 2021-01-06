@@ -110,9 +110,14 @@ class GameScene: SKScene {
     }
     
     private func runWaterAnimation(at point: CGPoint) {
-        let waterParticles = SKEmitterNode(fileNamed: Particles.waterSplash)
-        waterParticles?.position = point
-        addChild(waterParticles!)
+        let waterEmitter = SKEmitterNode(fileNamed: Particles.waterSplash)!
+        waterEmitter.position = point
+        addChild(waterEmitter)
+        
+        let wait = SKAction.wait(forDuration: 3)
+        let destroy = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([wait, destroy])
+        waterEmitter.run(sequence)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -163,6 +168,7 @@ class GameScene: SKScene {
             run(splashSoundAction)
             runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
+            setCrocMouth(open: false)
             isLevelOver = true
         }
 
