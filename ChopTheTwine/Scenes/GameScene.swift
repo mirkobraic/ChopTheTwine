@@ -187,7 +187,7 @@ class GameScene: SKScene {
             runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
             isLevelOver = true
-            score = 0
+            GameScene.staticScore = 0
         }
 
         let distance = prize.position.distance(toPoint: crocodile.position)
@@ -217,7 +217,7 @@ extension GameScene: SKPhysicsContactDelegate {
             run(nomNomSoundAction)
             
             isLevelOver = true
-            score += 1
+            GameScene.staticScore += 1
             switchToNewGame(withTransition: .doorway(withDuration: 0.8))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)
