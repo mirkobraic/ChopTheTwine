@@ -10,9 +10,18 @@ import AVFoundation
 
 class GameScene: SKScene {
     static var backgroundMusicPlayer: AVAudioPlayer!
+    static var staticScore = 0
+    
+    var score = GameScene.staticScore {
+        didSet {
+            scoreLabel?.text = "Score: \(score)"
+            GameScene.staticScore = score
+        }
+    }
     
     var crocodile: SKSpriteNode!
     var prize: SKSpriteNode!
+    var scoreLabel: SKLabelNode?
     
     var sliceSoundAction: SKAction!
     var splashSoundAction: SKAction!
@@ -42,6 +51,7 @@ class GameScene: SKScene {
         setupPhysics()
         setupBackground()
         setupLevel(levelData: levelData)
+        setupScoreLabel()
         setupSlices()
         setupAudio()
     }
@@ -176,6 +186,7 @@ class GameScene: SKScene {
             runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
             isLevelOver = true
+            score = 0
         }
 
         let distance = prize.position.distance(toPoint: crocodile.position)
@@ -205,6 +216,7 @@ extension GameScene: SKPhysicsContactDelegate {
             run(nomNomSoundAction)
             
             isLevelOver = true
+            score += 1
             switchToNewGame(withTransition: .doorway(withDuration: 0.8))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)

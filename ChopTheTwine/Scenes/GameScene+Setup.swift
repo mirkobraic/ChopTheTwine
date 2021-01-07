@@ -65,28 +65,21 @@ extension GameScene {
     }
     
     private func setupVines(fromAnchors anchors: [CGPoint], toPrizeLocation prizeLocation: CGPoint) {
-//        let decoder = PropertyListDecoder()
-//
-//        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.level1, withExtension: nil) else { return }
-//        guard let data = try? Data(contentsOf: dataFile) else { return }
-//        guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
-//
-//        for (i, vineData) in vines.enumerated() {
-//            let anchorX = vineData.relAnchorPoint.x * size.width
-//            let anchorY = vineData.relAnchorPoint.y * size.height
-//            let anchorPoint = CGPoint(x: anchorX, y: anchorY)
-//
-//            let vine = VineNode(length: vineData.length, anchorPoint: anchorPoint, name: "\(i)")
-//
-//            vine.addToScene(self)
-//            vine.attachToPrize(prize)
-//        }
-        
         for (index, anchor) in anchors.enumerated() {
             let vine = VineNode(startPoint: anchor, finishPoint: prizeLocation, name: "\(index)")
             vine.addToScene(self)
             vine.attachToPrize(prize)
         }
+    }
+    
+    func setupScoreLabel() {
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel?.fontSize = 20
+        scoreLabel!.horizontalAlignmentMode = .left
+        scoreLabel!.position = CGPoint(x: 50, y: 40)
+        scoreLabel!.zPosition = Layers.score
+        scoreLabel!.text = "Score: \(score)"
+        addChild(scoreLabel!)
     }
     
     func setupSlices() {

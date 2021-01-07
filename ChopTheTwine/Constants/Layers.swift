@@ -15,4 +15,5 @@ enum Layers {
     static let foreground: CGFloat = 3
     static let sliceBG: CGFloat = 4
     static let sliceFG: CGFloat = 5
+    static let score: CGFloat = 6
 }
