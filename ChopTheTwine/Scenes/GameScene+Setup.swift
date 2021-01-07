@@ -31,9 +31,19 @@ extension GameScene {
         addChild(water)
     }
     
-    func setupCrocodile() {
+    func setupLevel(levelName: String) {
+        let levelParser = LevelParser()
+        let levelData = levelParser.parseLevel(withName: levelName)
+        
+        setupCrocodile(at: levelData.crocodileLocation)
+        setupPrize(at: levelData.prizeLocation)
+        setupVines(fromAnchors: levelData.anchorLocations, toPrizeLocation: levelData.prizeLocation)
+    }
+    
+    private func setupCrocodile(at location: CGPoint) {
         crocodile = SKSpriteNode(imageNamed: Images.crocMouthClosed)
-        crocodile.position = CGPoint(x: size.width * CGFloat.random(in: 0.15...0.85), y: groundHeight)
+        let position = CGPoint(x: location.x, y: groundHeight)
+        crocodile.position = position
         crocodile.zPosition = Layers.crocodile
         let crocodileTexture = SKTexture(imageNamed: Images.crocMask)
         crocodile.physicsBody = SKPhysicsBody(texture: crocodileTexture, size: crocodile.size)
@@ -41,13 +51,13 @@ extension GameScene {
         crocodile.physicsBody?.collisionBitMask = 0
         crocodile.physicsBody?.contactTestBitMask = PhysicsCategory.prize
         crocodile.physicsBody?.isDynamic = false
-            
+
         addChild(crocodile)
     }
     
-    func setupPrize() {
+    private func setupPrize(at location: CGPoint) {
         prize = SKSpriteNode(imageNamed: Images.prize)
-        prize.position = CGPoint(x: size.width * 0.5, y: size.height * 0.7)
+        prize.position = location
         prize.zPosition = Layers.prize
         let prizeTexture = SKTexture(imageNamed: Images.prizeMask)
         prize.physicsBody = SKPhysicsBody(texture: prizeTexture, size: prize.size)
@@ -58,20 +68,26 @@ extension GameScene {
         addChild(prize)
     }
     
-    func setupVines() {
-        let decoder = PropertyListDecoder()
+    private func setupVines(fromAnchors anchors: [CGPoint], toPrizeLocation prizeLocation: CGPoint) {
+//        let decoder = PropertyListDecoder()
+//
+//        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.level1, withExtension: nil) else { return }
+//        guard let data = try? Data(contentsOf: dataFile) else { return }
+//        guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
+//
+//        for (i, vineData) in vines.enumerated() {
+//            let anchorX = vineData.relAnchorPoint.x * size.width
+//            let anchorY = vineData.relAnchorPoint.y * size.height
+//            let anchorPoint = CGPoint(x: anchorX, y: anchorY)
+//
+//            let vine = VineNode(length: vineData.length, anchorPoint: anchorPoint, name: "\(i)")
+//
+//            vine.addToScene(self)
+//            vine.attachToPrize(prize)
+//        }
         
-        guard let dataFile = Bundle.main.url(forResource: GameConfiguration.level1, withExtension: nil) else { return }
-        guard let data = try? Data(contentsOf: dataFile) else { return }
-        guard let vines = try? decoder.decode([VineData].self, from: data) else { return }
-        
-        for (i, vineData) in vines.enumerated() {
-            let anchorX = vineData.relAnchorPoint.x * size.width
-            let anchorY = vineData.relAnchorPoint.y * size.height
-            let anchorPoint = CGPoint(x: anchorX, y: anchorY)
-            
-            let vine = VineNode(length: vineData.length, anchorPoint: anchorPoint, name: "\(i)")
-            
+        for (index, anchor) in anchors.enumerated() {
+            let vine = VineNode(startPoint: anchor, finishPoint: prizeLocation, name: "\(index)")
             vine.addToScene(self)
             vine.attachToPrize(prize)
         }

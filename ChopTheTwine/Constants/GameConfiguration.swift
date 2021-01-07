@@ -7,7 +7,10 @@
 
 import Foundation
 
-enum GameConfiguration {
-    static let level1 = "Level1.plist"
+class GameConfiguration {
+    private static let level1 = "Level1.txt"
     
+    static func randomLevel() -> String {
+        return level1
+    }
 }
