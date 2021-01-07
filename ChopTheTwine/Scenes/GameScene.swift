@@ -117,6 +117,7 @@ class GameScene: SKScene {
         let delay = SKAction.wait(forDuration: 1)
         let sceneChange = SKAction.run {
             let scene = GameScene(size: self.size)
+            scene.scaleMode = .aspectFill
             self.view?.presentScene(scene, transition: transition)
         }
         
