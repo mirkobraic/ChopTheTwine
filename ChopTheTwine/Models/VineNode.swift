@@ -17,7 +17,7 @@ class VineNode: SKNode {
         anchorPoint = startPoint
         
         let vineSegmentSize: CGFloat = 8
-        length = Int((startPoint.distance(toPoint: finishPoint) - 30) / vineSegmentSize)
+        length = Int((startPoint.distance(toPoint: finishPoint) - 20) / vineSegmentSize)
         
         super.init()
         

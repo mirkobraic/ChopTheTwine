@@ -99,8 +99,8 @@
 				A21B750B25A3E2BC00B6FF3F /* Controllers */,
 				A21B750C25A3E2C800B6FF3F /* Scenes */,
 				A2797B5825A5340F00FE96A3 /* Extensions */,
-				A21B750425A3E22D00B6FF3F /* Supporting Files */,
 				A2797B4D25A5255500FE96A3 /* Resources */,
+				A21B750425A3E22D00B6FF3F /* Supporting Files */,
 				A21B74E125A3CFAF00B6FF3F /* Assets.xcassets */,
 				A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */,
 			);

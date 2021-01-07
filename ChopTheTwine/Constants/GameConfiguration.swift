@@ -8,7 +8,7 @@
 import Foundation
 
 class GameConfiguration {
-    private static let level1 = "Level1.txt"
+    private static let level1 = "Level1"
     
     static func randomLevel() -> String {
         return level1

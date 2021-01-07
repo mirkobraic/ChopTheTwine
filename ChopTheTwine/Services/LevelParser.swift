@@ -8,14 +8,47 @@
 import UIKit
 
 class LevelParser {
-    func parseLevel(withName levelName: String) -> LevelData {
-//        guard let levelURL = Bundle.main.url(forResource: levelName, withExtension: "txt") else {
-//            fatalError("Could not find \(levelName).txt in the app bundle.")
-//        }
-//        guard let levelString = try? String(contentsOf: levelURL) else {
-//            fatalError("Could not load level1.txt from the app bundle.")
-//        }
+    func parseLevel(withName levelName: String, screenSize: CGSize) -> LevelData {
+        guard let levelURL = Bundle.main.url(forResource: levelName, withExtension: "txt") else {
+            fatalError("Could not find \(levelName).txt in the app bundle.")
+        }
+        guard let levelString = try? String(contentsOf: levelURL) else {
+            fatalError("Could not load level1.txt from the app bundle.")
+        }
         
-        return LevelData(crocodileLocation: CGPoint(x: 100, y: 300), prizeLocation: CGPoint(x: 200, y: 300), anchorLocations: [CGPoint(x: 150, y: 600), CGPoint(x: 250, y: 400)])
+        var lines = levelString.components(separatedBy: "\n")
+        // remove empty line
+        lines.removeLast()
+        
+        // ensure that level is at least 3x3
+        guard lines.count >= 5, lines[0].count >= 6 else {
+            fatalError("Invalid level format")
+        }
+        
+        let heightQuant = screenSize.height / CGFloat(lines.count)
+        let widthQuant = screenSize.width / CGFloat(lines[0].count)
+        
+        // remove first and last **** lines
+        lines.removeFirst()
+        lines.removeLast()
+        
+        var levelData = LevelData()
+        for (row, line) in lines.reversed().enumerated() {
+            for (column, letter) in line.enumerated() {
+                let x = widthQuant * CGFloat(column)
+                let y = heightQuant * CGFloat(row)
+                let position = CGPoint(x: x, y: y)
+                
+                if letter == "a" {
+                    levelData.anchorLocations.append(position)
+                } else if letter == "p" {
+                    levelData.prizeLocation = position
+                } else if letter == "c" {
+                    levelData.crocodileLocation = position
+                }
+            }
+        }
+        
+        return levelData
     }
 }

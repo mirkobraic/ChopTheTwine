@@ -33,7 +33,7 @@ extension GameScene {
     
     func setupLevel(levelName: String) {
         let levelParser = LevelParser()
-        let levelData = levelParser.parseLevel(withName: levelName)
+        let levelData = levelParser.parseLevel(withName: levelName, screenSize: size)
         
         setupCrocodile(at: levelData.crocodileLocation)
         setupPrize(at: levelData.prizeLocation)
