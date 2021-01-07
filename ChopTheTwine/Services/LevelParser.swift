@@ -8,7 +8,7 @@
 import UIKit
 
 class LevelParser {
-    func parseLevel(withName levelName: String, screenSize: CGSize) -> LevelData {
+    func parseLevel(withName levelName: String, screenSize: CGSize, groundOffset: CGFloat) -> LevelData {
         guard let levelURL = Bundle.main.url(forResource: levelName, withExtension: "txt") else {
             fatalError("Could not find \(levelName).txt in the app bundle.")
         }
@@ -25,7 +25,7 @@ class LevelParser {
             fatalError("Invalid level format")
         }
         
-        let heightQuant = screenSize.height / CGFloat(lines.count)
+        let heightQuant = (screenSize.height - groundOffset) / CGFloat(lines.count)
         let widthQuant = screenSize.width / CGFloat(lines[0].count)
         
         // remove first and last **** lines
@@ -36,7 +36,7 @@ class LevelParser {
         for (row, line) in lines.reversed().enumerated() {
             for (column, letter) in line.enumerated() {
                 let x = widthQuant * CGFloat(column)
-                let y = heightQuant * CGFloat(row)
+                let y = heightQuant * CGFloat(row) + groundOffset
                 let position = CGPoint(x: x, y: y)
                 
                 if letter == "a" {
