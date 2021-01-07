@@ -31,10 +31,7 @@ extension GameScene {
         addChild(water)
     }
     
-    func setupLevel(levelName: String) {
-        let levelParser = LevelParser()
-        let levelData = levelParser.parseLevel(withName: levelName, screenSize: size)
-        
+    func setupLevel(levelData: LevelData) {
         setupCrocodile(at: levelData.crocodileLocation)
         setupPrize(at: levelData.prizeLocation)
         setupVines(fromAnchors: levelData.anchorLocations, toPrizeLocation: levelData.prizeLocation)
@@ -42,8 +39,7 @@ extension GameScene {
     
     private func setupCrocodile(at location: CGPoint) {
         crocodile = SKSpriteNode(imageNamed: Images.crocMouthClosed)
-        let position = CGPoint(x: location.x, y: groundHeight)
-        crocodile.position = position
+        crocodile.position = location
         crocodile.zPosition = Layers.crocodile
         let crocodileTexture = SKTexture(imageNamed: Images.crocMask)
         crocodile.physicsBody = SKPhysicsBody(texture: crocodileTexture, size: crocodile.size)

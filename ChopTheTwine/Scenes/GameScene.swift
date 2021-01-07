@@ -35,9 +35,13 @@ class GameScene: SKScene {
         waterHeight = size.height * 0.2139
         groundHeight = size.height * 0.308
         
+        let levelParser = LevelParser()
+        var levelData = levelParser.parseLevel(withName: GameConfiguration.randomLevel(), screenSize: size)
+        levelData.crocodileLocation.y = groundHeight
+        
         setupPhysics()
         setupBackground()
-        setupLevel(levelName: GameConfiguration.randomLevel())
+        setupLevel(levelData: levelData)
         setupSlices()
         setupAudio()
     }
