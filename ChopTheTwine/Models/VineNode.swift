@@ -13,9 +13,11 @@ class VineNode: SKNode {
     private let anchorPoint: CGPoint
     private var vineSegments: [SKNode] = []
     
-    init(length: Int, anchorPoint: CGPoint, name: String) {
-        self.length = length
-        self.anchorPoint = anchorPoint
+    init(startPoint: CGPoint, finishPoint: CGPoint, name: String) {
+        anchorPoint = startPoint
+        
+        let vineSegmentSize: CGFloat = 8
+        length = Int((startPoint.distance(toPoint: finishPoint) - 20) / vineSegmentSize)
         
         super.init()
         
@@ -23,10 +25,7 @@ class VineNode: SKNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        length = aDecoder.decodeInteger(forKey: "length")
-        anchorPoint = aDecoder.decodeCGPoint(forKey: "anchorPoint")
-        
-        super.init(coder: aDecoder)
+        fatalError("Not implemented")
     }
     
     func addToScene(_ scene: SKScene) {

@@ -26,20 +26,22 @@ class GameScene: SKScene {
     var activeSlicePoints = [CGPoint]()
     let activeSliceTresh = 10
     
-    private let openMouthTresh: CGFloat = 150
+    private let openMouthTresh: CGFloat = 100
     private var areCrocMouthOpen = false
     
     private var isLevelOver = false
     
     override func didMove(to view: SKView) {
         waterHeight = size.height * 0.2139
-        groundHeight = size.height * 0.312
+        groundHeight = size.height * 0.308
+        
+        let levelParser = LevelParser()
+        var levelData = levelParser.parseLevel(withName: GameConfiguration.randomLevel(), screenSize: size, groundOffset: groundHeight)
+        levelData.crocodileLocation.y = groundHeight
         
         setupPhysics()
         setupBackground()
-        setupCrocodile()
-        setupPrize()
-        setupVines()
+        setupLevel(levelData: levelData)
         setupSlices()
         setupAudio()
     }
