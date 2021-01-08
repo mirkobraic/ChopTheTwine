@@ -8,7 +8,7 @@
 import UIKit
 
 struct LevelData {
-    var crocodileLocation = CGPoint()
-    var prizeLocation = CGPoint()
+    var crocodileLocation: CGPoint!
+    var prizeLocation: CGPoint!
     var anchorLocations = [CGPoint]()
 }
