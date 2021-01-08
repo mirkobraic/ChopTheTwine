@@ -45,7 +45,7 @@ class GameScene: SKScene {
         groundHeight = size.height * 0.308
         
         let levelParser = LevelParser()
-        var levelData = levelParser.parseLevel(withName: GameConfiguration.randomLevel(), screenSize: size, groundOffset: groundHeight)
+        var levelData = levelParser.parseLevel(withName: GameLevelManager.shared.randomLevel(), screenSize: size, groundOffset: groundHeight)
         levelData.crocodileLocation.y = groundHeight
         
         setupPhysics()
