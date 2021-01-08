@@ -218,7 +218,7 @@ extension GameScene: SKPhysicsContactDelegate {
             
             isLevelOver = true
             GameScene.staticScore += 1
-            switchToNewGame(withTransition: .doorway(withDuration: 0.8))
+            switchToNewGame(withTransition: .flipVertical(withDuration: 0.8))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)
             }
