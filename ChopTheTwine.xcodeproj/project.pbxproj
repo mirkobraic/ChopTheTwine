@@ -16,7 +16,11 @@
 		A21B751325A3E56800B6FF3F /* Layers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B751225A3E56800B6FF3F /* Layers.swift */; };
 		A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */; };
 		A21B753D25A3EE9A00B6FF3F /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B753C25A3EE9A00B6FF3F /* PhysicsCategory.swift */; };
-		A2797B4B25A524A500FE96A3 /* GameConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B4A25A524A500FE96A3 /* GameConfiguration.swift */; };
+		A2750D3125A7D57100573C75 /* Level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2750D3025A7D57100573C75 /* Level2.txt */; };
+		A2750D3925A7DB0600573C75 /* Level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2750D3825A7DB0600573C75 /* Level3.txt */; };
+		A2750D3C25A7DBB700573C75 /* Level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2750D3B25A7DBB700573C75 /* Level4.txt */; };
+		A2750D3F25A7DC9500573C75 /* Level5.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2750D3E25A7DC9500573C75 /* Level5.txt */; };
+		A2797B4B25A524A500FE96A3 /* GameLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B4A25A524A500FE96A3 /* GameLevelManager.swift */; };
 		A2797B5325A5264D00FE96A3 /* VineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5225A5264D00FE96A3 /* VineNode.swift */; };
 		A2797B5A25A5342800FE96A3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5925A5342800FE96A3 /* CGPoint.swift */; };
 		A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */; };
@@ -45,7 +49,11 @@
 		A21B751225A3E56800B6FF3F /* Layers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layers.swift; sourceTree = "<group>"; };
 		A21B751B25A3EB0800B6FF3F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A21B753C25A3EE9A00B6FF3F /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
-		A2797B4A25A524A500FE96A3 /* GameConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfiguration.swift; sourceTree = "<group>"; };
+		A2750D3025A7D57100573C75 /* Level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Level2.txt; sourceTree = "<group>"; };
+		A2750D3825A7DB0600573C75 /* Level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Level3.txt; sourceTree = "<group>"; };
+		A2750D3B25A7DBB700573C75 /* Level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Level4.txt; sourceTree = "<group>"; };
+		A2750D3E25A7DC9500573C75 /* Level5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Level5.txt; sourceTree = "<group>"; };
+		A2797B4A25A524A500FE96A3 /* GameLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelManager.swift; sourceTree = "<group>"; };
 		A2797B5225A5264D00FE96A3 /* VineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineNode.swift; sourceTree = "<group>"; };
 		A2797B5925A5342800FE96A3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		A2797B5F25A539EB00FE96A3 /* GameScene+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Setup.swift"; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 				A21B74D425A3CFAE00B6FF3F /* AppDelegate.swift */,
 				A21B751125A3E55200B6FF3F /* Constants */,
 				A21B750925A3E2A600B6FF3F /* Models */,
+				A2750D3525A7D60400573C75 /* Managers */,
 				A27CF12225A7B7070095B072 /* Services */,
 				A21B750B25A3E2BC00B6FF3F /* Controllers */,
 				A21B750C25A3E2C800B6FF3F /* Scenes */,
@@ -150,9 +159,16 @@
 				A2956C3525A6342100825E73 /* Particles.swift */,
 				A2956C1425A62EB400825E73 /* Sound.swift */,
 				A21B753C25A3EE9A00B6FF3F /* PhysicsCategory.swift */,
-				A2797B4A25A524A500FE96A3 /* GameConfiguration.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		A2750D3525A7D60400573C75 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A2797B4A25A524A500FE96A3 /* GameLevelManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		A2797B4D25A5255500FE96A3 /* Resources */ = {
@@ -169,6 +185,10 @@
 			isa = PBXGroup;
 			children = (
 				A27CF11E25A7B56B0095B072 /* Level1.txt */,
+				A2750D3025A7D57100573C75 /* Level2.txt */,
+				A2750D3825A7DB0600573C75 /* Level3.txt */,
+				A2750D3B25A7DBB700573C75 /* Level4.txt */,
+				A2750D3E25A7DC9500573C75 /* Level5.txt */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -268,6 +288,7 @@
 			files = (
 				A21B751C25A3EB0800B6FF3F /* Launch Screen.storyboard in Resources */,
 				A2956C1C25A62EDB00825E73 /* Slice.caf in Resources */,
+				A2750D3F25A7DC9500573C75 /* Level5.txt in Resources */,
 				A2956C3125A6332F00825E73 /* WaterSplash.sks in Resources */,
 				A27CF11F25A7B56B0095B072 /* Level1.txt in Resources */,
 				A2956C3225A6332F00825E73 /* Assets.xcassets in Resources */,
@@ -276,6 +297,9 @@
 				A2956C1F25A62EDB00825E73 /* Splash.caf in Resources */,
 				A2956C1D25A62EDB00825E73 /* CheeZeeJungle.caf in Resources */,
 				A2956C1E25A62EDB00825E73 /* NomNom.caf in Resources */,
+				A2750D3125A7D57100573C75 /* Level2.txt in Resources */,
+				A2750D3C25A7DBB700573C75 /* Level4.txt in Resources */,
+				A2750D3925A7DB0600573C75 /* Level3.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +317,7 @@
 				A21B751325A3E56800B6FF3F /* Layers.swift in Sources */,
 				A2956C3625A6342100825E73 /* Particles.swift in Sources */,
 				A2797B6025A539EB00FE96A3 /* GameScene+Setup.swift in Sources */,
-				A2797B4B25A524A500FE96A3 /* GameConfiguration.swift in Sources */,
+				A2797B4B25A524A500FE96A3 /* GameLevelManager.swift in Sources */,
 				A2956C1525A62EB400825E73 /* Sound.swift in Sources */,
 				A21B753D25A3EE9A00B6FF3F /* PhysicsCategory.swift in Sources */,
 				A21B74DD25A3CFAE00B6FF3F /* GameViewController.swift in Sources */,

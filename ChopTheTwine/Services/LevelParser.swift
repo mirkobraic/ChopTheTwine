@@ -9,7 +9,9 @@ import UIKit
 
 class LevelParser {
     func parseLevel(withName levelName: String, screenSize: CGSize, groundOffset: CGFloat) -> LevelData {
-        guard let levelURL = Bundle.main.url(forResource: levelName, withExtension: "txt") else {
+        let name = (levelName as NSString).deletingPathExtension
+        
+        guard let levelURL = Bundle.main.url(forResource: name, withExtension: "txt") else {
             fatalError("Could not find \(levelName).txt in the app bundle.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {

@@ -10,9 +10,18 @@ import AVFoundation
 
 class GameScene: SKScene {
     static var backgroundMusicPlayer: AVAudioPlayer!
+    static var staticScore = 0
+    
+    var score = GameScene.staticScore {
+        didSet {
+            scoreLabel?.text = "Score: \(score)"
+            GameScene.staticScore = score
+        }
+    }
     
     var crocodile: SKSpriteNode!
     var prize: SKSpriteNode!
+    var scoreLabel: SKLabelNode?
     
     var sliceSoundAction: SKAction!
     var splashSoundAction: SKAction!
@@ -36,12 +45,13 @@ class GameScene: SKScene {
         groundHeight = size.height * 0.308
         
         let levelParser = LevelParser()
-        var levelData = levelParser.parseLevel(withName: GameConfiguration.randomLevel(), screenSize: size, groundOffset: groundHeight)
+        var levelData = levelParser.parseLevel(withName: GameLevelManager.shared.randomLevel(), screenSize: size, groundOffset: groundHeight)
         levelData.crocodileLocation.y = groundHeight
         
         setupPhysics()
         setupBackground()
         setupLevel(levelData: levelData)
+        setupScoreLabel()
         setupSlices()
         setupAudio()
     }
@@ -107,6 +117,7 @@ class GameScene: SKScene {
         let delay = SKAction.wait(forDuration: 1)
         let sceneChange = SKAction.run {
             let scene = GameScene(size: self.size)
+            scene.scaleMode = .aspectFill
             self.view?.presentScene(scene, transition: transition)
         }
         
@@ -176,6 +187,7 @@ class GameScene: SKScene {
             runWaterAnimation(at: CGPoint(x: prize.position.x, y: waterHeight))
             switchToNewGame(withTransition: .fade(withDuration: 0.8))
             isLevelOver = true
+            GameScene.staticScore = 0
         }
 
         let distance = prize.position.distance(toPoint: crocodile.position)
@@ -205,7 +217,8 @@ extension GameScene: SKPhysicsContactDelegate {
             run(nomNomSoundAction)
             
             isLevelOver = true
-            switchToNewGame(withTransition: .doorway(withDuration: 0.8))
+            GameScene.staticScore += 1
+            switchToNewGame(withTransition: .flipVertical(withDuration: 0.8))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 self.setCrocMouth(open: false)
             }
